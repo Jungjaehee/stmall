@@ -38,38 +38,6 @@ public class Inventory {
     }
 
     //<<< Clean Arch / Port Method
-    public static void decreaseStock(DeliveryCompleted deliveryCompleted) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Inventory inventory = new Inventory();
-        repository().save(inventory);
-
-        StockDecreased stockDecreased = new StockDecreased(inventory);
-        stockDecreased.publishAfterCommit();
-        SoldOut soldOut = new SoldOut(inventory);
-        soldOut.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(deliveryCompleted.get???()).ifPresent(inventory->{
-            
-            inventory // do something
-            repository().save(inventory);
-
-            StockDecreased stockDecreased = new StockDecreased(inventory);
-            stockDecreased.publishAfterCommit();
-            SoldOut soldOut = new SoldOut(inventory);
-            soldOut.publishAfterCommit();
-
-         });
-        */
-
-    }
-
-    //>>> Clean Arch / Port Method
-    //<<< Clean Arch / Port Method
     public static void decreaseStock(OrderPlaced orderPlaced) {
         //implement business logic here:
 
@@ -94,6 +62,30 @@ public class Inventory {
             stockDecreased.publishAfterCommit();
             SoldOut soldOut = new SoldOut(inventory);
             soldOut.publishAfterCommit();
+
+         });
+        */
+
+    }
+
+    //>>> Clean Arch / Port Method
+    //<<< Clean Arch / Port Method
+    public static void increaseStock(DeliveryReturned deliveryReturned) {
+        //implement business logic here:
+
+        /** Example 1:  new item 
+        Inventory inventory = new Inventory();
+        repository().save(inventory);
+
+        */
+
+        /** Example 2:  finding and process
+        
+        repository().findById(deliveryReturned.get???()).ifPresent(inventory->{
+            
+            inventory // do something
+            repository().save(inventory);
+
 
          });
         */

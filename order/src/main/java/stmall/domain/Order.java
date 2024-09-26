@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 import stmall.OrderApplication;
+import stmall.domain.OrderCancelled;
 import stmall.domain.OrderPlaced;
 
 @Entity
@@ -32,6 +33,9 @@ public class Order {
     public void onPostPersist() {
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
+
+        OrderCancelled orderCancelled = new OrderCancelled(this);
+        orderCancelled.publishAfterCommit();
     }
 
     public static OrderRepository repository() {
@@ -46,6 +50,13 @@ public class Order {
 
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
+    }
+
+    public void cancel() {
+        //implement business logic here:
+
+        OrderCancelled orderCancelled = new OrderCancelled(this);
+        orderCancelled.publishAfterCommit();
     }
 
     //<<< Clean Arch / Port Method

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import lombok.Data;
 import stmall.DeliveryApplication;
 import stmall.domain.DeliveryCompleted;
+import stmall.domain.DeliveryReturned;
 import stmall.domain.DeliveryStarted;
 
 @Entity
@@ -36,6 +37,9 @@ public class Delivery {
 
         DeliveryCompleted deliveryCompleted = new DeliveryCompleted(this);
         deliveryCompleted.publishAfterCommit();
+
+        DeliveryReturned deliveryReturned = new DeliveryReturned(this);
+        deliveryReturned.publishAfterCommit();
     }
 
     public static DeliveryRepository repository() {
@@ -48,6 +52,13 @@ public class Delivery {
     public void completedelivery() {
         //implement business logic here:
 
+    }
+
+    public void completeReturn() {
+        //implement business logic here:
+
+        DeliveryReturned deliveryReturned = new DeliveryReturned(this);
+        deliveryReturned.publishAfterCommit();
     }
 
     //<<< Clean Arch / Port Method

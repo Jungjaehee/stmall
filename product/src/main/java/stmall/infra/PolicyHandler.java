@@ -25,22 +25,6 @@ public class PolicyHandler {
 
     @StreamListener(
         value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='DeliveryCompleted'"
-    )
-    public void wheneverDeliveryCompleted_DecreaseStock(
-        @Payload DeliveryCompleted deliveryCompleted
-    ) {
-        DeliveryCompleted event = deliveryCompleted;
-        System.out.println(
-            "\n\n##### listener DecreaseStock : " + deliveryCompleted + "\n\n"
-        );
-
-        // Sample Logic //
-        Inventory.decreaseStock(event);
-    }
-
-    @StreamListener(
-        value = KafkaProcessor.INPUT,
         condition = "headers['type']=='OrderPlaced'"
     )
     public void wheneverOrderPlaced_DecreaseStock(
@@ -53,6 +37,22 @@ public class PolicyHandler {
 
         // Sample Logic //
         Inventory.decreaseStock(event);
+    }
+
+    @StreamListener(
+        value = KafkaProcessor.INPUT,
+        condition = "headers['type']=='DeliveryReturned'"
+    )
+    public void wheneverDeliveryReturned_IncreaseStock(
+        @Payload DeliveryReturned deliveryReturned
+    ) {
+        DeliveryReturned event = deliveryReturned;
+        System.out.println(
+            "\n\n##### listener IncreaseStock : " + deliveryReturned + "\n\n"
+        );
+
+        // Sample Logic //
+        Inventory.increaseStock(event);
     }
 }
 //>>> Clean Arch / Inbound Adaptor
